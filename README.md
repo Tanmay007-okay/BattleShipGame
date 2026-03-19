@@ -54,8 +54,6 @@ You uncover tiles one by one to find all hidden ships before you run out of clic
 ## Screenshots
 
 
-- docs/screenshots/game-win.png
-- docs/screenshots/game-lose.png
 
 ### Game Start
 
@@ -63,13 +61,16 @@ You uncover tiles one by one to find all hidden ships before you run out of clic
 
 ### Win Screen
 
-![Win Screen](docs/screenshots/game-win.png)
+Sadly,i never won.
+But you may try your luck.
 
 ### Lose Screen
 
-![Lose Screen](docs/screenshots/game-lose.png)
+![Lose Screen](docs/screenshots/losse-screen.png)
 
-If images are not added yet, these preview boxes will appear broken on GitHub until you upload the files.
+### Instruction Screen
+![Instruction Screen](docs/screenshots/instructions.png)
+
 
 ## Setup On Desktop
 
