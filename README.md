@@ -59,7 +59,7 @@ You uncover tiles one by one to find all hidden ships before you run out of clic
 
 ### Game Start
 
-![Game Start](docs/screenshots/Screenshot2026-03-19203603.png)
+![Game Start](docs/screenshots/game-start.png)
 
 ### Win Screen
 
