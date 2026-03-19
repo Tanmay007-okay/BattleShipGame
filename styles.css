@@ -1,0 +1,349 @@
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Task 01: Body — tomato background ── */
+body {
+  background-color: rgba(226, 77, 50, 0.822);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 36px 20px 48px;
+  font-family: 'Barlow', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Decorative ocean wave overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 110%, rgb(5, 155, 255) 0%, transparent 90%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 38px,
+      rgba(255,255,255,0.04) 38px,
+      rgba(255,255,255,0.04) 40px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Page Wrapper ── */
+.page-wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  width: 100%;
+  max-width: 560px;
+}
+
+/* ── Task 01: Heading ── */
+h1 {
+  font-family: 'Bebas Neue', cursive;
+  font-size: clamp(56px, 13vw, 96px);
+  letter-spacing: 6px;
+  color: #fff5f5;
+  text-shadow:
+    0 4px 0 rgba(0,0,0,0.25),
+    0 8px 24px rgba(0,0,0,0.18);
+  /* Task 01 — underline with light red */
+  text-decoration: underline;
+  text-decoration-color: lightcoral;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 3px;
+  line-height: 1;
+}
+
+.ship-icon {
+  font-size: 0.7em;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* ── Status Bar ── */
+.status-bar {
+  display: flex;
+  gap: 24px;
+  background: rgba(70, 33, 33, 0.18);
+  border: 1.5px solid rgba(255,255,255,0.35);
+  border-radius: 40px;
+  padding: 10px 28px;
+  backdrop-filter: blur(6px);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.stat-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+  font-weight: 600;
+}
+
+.stat-value {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 26px;
+  color: #fff;
+  line-height: 1;
+}
+
+.stat-value.warning { color: #ffe082; }
+.stat-value.danger  { color: #ffcdd2; }
+
+/* ── Task 02: Grid Wrapper ── */
+.grid-wrapper {
+  background: rgba(0,30,60,0.35);
+  border: 4px solid #453f52;
+  border-radius: 16px;
+  padding: 16px;
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.15);
+}
+
+/* ── Task 02: 4×4 Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+/* ── Task 02: Cells with snow border ── */
+.cell {
+  width: 100px;
+  height: 100px;
+  border: 2.5px solid snow;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  background: linear-gradient(135deg, rgba(0,80,160,0.55), rgba(0,40,100,0.65));
+}
+
+.cell:hover:not(.revealed) {
+  transform: scale(1.06);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.5), 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Cell Front (ocean surface before reveal) */
+.cell-front {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  background: linear-gradient(145deg, #0062a3 0%, #003d6e 100%);
+  transition: opacity 0.35s ease;
+  border-radius: 7px;
+}
+
+/* Ripple decoration on unrevealed cell */
+.cell-front::after {
+  content: '〰';
+  color: rgba(255,255,255,0.12);
+  font-size: 36px;
+  letter-spacing: -4px;
+}
+
+/* Cell Back (revealed content) */
+.cell-back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  opacity: 0;
+  transform: scale(0.6) rotateY(90deg);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  border-radius: 7px;
+}
+
+/* Task 03: Reveal animation states */
+.cell.revealed .cell-front {
+  opacity: 0;
+  pointer-events: none;
+}
+.cell.revealed .cell-back {
+  opacity: 1;
+  transform: scale(1) rotateY(0deg);
+}
+.cell.revealed {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Ship cell background */
+.cell.ship .cell-back {
+  background: linear-gradient(135deg, #1b5e20, #388e3c);
+}
+
+/* Water cell background */
+.cell.water .cell-back {
+  background: linear-gradient(135deg, #0288d1, #01579b);
+}
+
+/* ── Task 02: Reset Button — light red box-shadow ── */
+.reset-btn {
+  margin-top: 16px;
+  padding: 13px 48px;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 22px;
+  letter-spacing: 3px;
+  color: #fff;
+  background: linear-gradient(135deg, #bb0b0b, #db5040);
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  box-shadow:
+    0 0 0 3px lightcoral,
+    0 8px 24px rgba(255,100,80,0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reset-btn:hover {
+  transform: translateY(3px);
+  box-shadow:
+    0 0 0 4px rgb(139, 102, 102),
+    0 12px 32px rgba(255,100,80,0.45);
+  background: linear-gradient(135deg, #030303, #000000);
+}
+
+.reset-btn:active {
+  transform: translateY(0);
+}
+
+/* ── Task 04: Rules Card ── */
+.rules-card {
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  border-radius: 16px;
+  padding: 22px 28px;
+  backdrop-filter: blur(6px);
+  width: 100%;
+}
+
+.rules-title {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 22px;
+  letter-spacing: 3px;
+  color: #fff;
+  margin-bottom: 12px;
+  border-bottom: 2px solid lightcoral;
+  padding-bottom: 8px;
+}
+
+.rules-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rules-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: rgba(255,255,255,0.9);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.rules-list li::before {
+  content: '⚓';
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+/* ── Task 05: Win / Lose Overlay ── */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+}
+
+.overlay.show {
+  display: flex;
+}
+
+.result-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 48px 56px;
+  text-align: center;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.4);
+  animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popIn {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.result-emoji {
+  font-size: 72px;
+  margin-bottom: 12px;
+}
+
+.result-title {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 52px;
+  letter-spacing: 4px;
+  margin-bottom: 8px;
+}
+
+.result-title.won  { color: #2e7d32; }
+.result-title.lost { color: #c62828; }
+
+.result-sub {
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 28px;
+}
+
+.play-again-btn {
+  padding: 12px 40px;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 20px;
+  letter-spacing: 2px;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  color: #0e0d0d;
+  background: rgb(248, 109, 85);
+  box-shadow: 0 0 0 3px lightcoral, 0 6px 20px rgba(196, 61, 43, 0.3);
+  transition: transform 0.15s ease;
+}
+
+.play-again-btn:hover {
+  transform: scale(1.4);
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Battleship</title>
+
+  
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600&display=swap" rel="stylesheet"/>
+
+ 
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+  <div class="page-wrapper">
+
+   
+    <h1>Battleship <span class="ship-icon">🚢</span></h1>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <div class="stat">
+        <span class="stat-label">Clicks Left</span>
+        <span class="stat-value" id="clicks-left">8</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Ships Found</span>
+        <span class="stat-value" id="ships-found">0 / 5</span>
+      </div>
+    </div>
+
+    <!-- 4x4 Grid + Reset Button -->
+    <div class="grid-wrapper">
+      <div class="grid" id="game-grid"></div>
+      <button class="reset-btn" id="reset-btn">⟳ &nbsp;Reset</button>
+    </div>
+
+    <!--  Rules -->
+    <div class="rules-card">
+      <div class="rules-title"> How to Play</div>
+      <ul class="rules-list">
+        <li>Click on the cells to reveal the image hidden behind them.</li>
+        <li>There are 5 ships hidden in the game.</li>
+        <li>You win if you can find all ships in less than 8 clicks, else you lose.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!--  Win / Lose Overlay -->
+  <div class="overlay" id="result-overlay">
+    <div class="result-card">
+      <div class="result-emoji" id="result-emoji"></div>
+      <div class="result-title" id="result-title"></div>
+      <div class="result-sub"   id="result-sub"></div>
+      <button class="play-again-btn" id="play-again-btn">Play Again</button>
+    </div>
+  </div>
+
+  <!-- External Script -->
+  <script src="script.js"></script>
+
+</body>
+</html>
