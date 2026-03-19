@@ -63,7 +63,7 @@ function renderGrid() {
     cell.appendChild(front);
     cell.appendChild(back);
 
-    // Task 03: click reveals the cell
+    //  click reveals the cell
     cell.addEventListener('click', () => handleClick(cell, idx));
 
     gridEl.appendChild(cell);
