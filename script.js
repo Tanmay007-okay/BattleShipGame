@@ -41,7 +41,7 @@ function initGame() {
   overlay.classList.remove('show');
 }
 
-// ── Task 02 & 03: Render the 4×4 grid ───────────────────────
+// ──  Render the 4×4 grid ───────────────────────
 function renderGrid() {
   gridEl.innerHTML = '';
 
@@ -70,7 +70,7 @@ function renderGrid() {
   });
 }
 
-// ── Task 03: Handle cell click ───────────────────────────────
+// ──  Handle cell click ───────────────────────────────
 function handleClick(cell, idx) {
   if (gameOver || cell.classList.contains('revealed')) return;
 
@@ -97,7 +97,7 @@ function updateStats() {
   shipsEl.textContent = `${shipsFound} / ${TOTAL_SHIPS}`;
 }
 
-// ── Task 05: Win / Lose check ────────────────────────────────
+// ──  Win / Lose check ────────────────────────────────
 function checkWinLose() {
   const allShipsFound = shipsFound === TOTAL_SHIPS;
   const outOfClicks   = clicksUsed >= MAX_CLICKS;
@@ -122,7 +122,7 @@ function revealAll() {
   });
 }
 
-// ── Task 05: Show result overlay ────────────────────────────
+// ──  Show result overlay ────────────────────────────
 function showResult(outcome, clicks) {
   if (outcome === 'won') {
     resultEmoji.textContent = '🎉';
