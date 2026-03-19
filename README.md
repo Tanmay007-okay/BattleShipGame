@@ -53,15 +53,13 @@ You uncover tiles one by one to find all hidden ships before you run out of clic
 
 ## Screenshots
 
-Add your screenshots to the folder below and keep these names for automatic display:
 
-- docs/screenshots/game-start.png
 - docs/screenshots/game-win.png
 - docs/screenshots/game-lose.png
 
 ### Game Start
 
-![Game Start](docs/screenshots/game-start.png)
+![Game Start](docs/screenshots/Screenshot 2026-03-19 203603.png)
 
 ### Win Screen
 
