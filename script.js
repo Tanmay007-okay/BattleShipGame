@@ -1,9 +1,3 @@
-
-
-
-
-
-
 'use strict';
 
 /* ── Difficulty Config ───────────────────────────────────────── */
@@ -85,7 +79,6 @@ function playSound(type) {
     });
 
   } catch (e) {
-    // Silently ignore audio errors (e.g. Safari quirks)
   }
 }
 
