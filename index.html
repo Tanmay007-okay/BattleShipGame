@@ -4,62 +4,133 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Battleship</title>
-
-  
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600&display=swap" rel="stylesheet"/>
-
- 
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
 
+  <!-- Animated background bubbles -->
+  <div class="bg-bubbles" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+
   <div class="page-wrapper">
 
-   
-    <h1>Battleship <span class="ship-icon">🚢</span></h1>
+    <!-- ── Header ── -->
+    <header class="game-header">
+      <h1>Battle<span class="accent">ship</span> <span class="ship-icon">🚢</span></h1>
+      <p class="tagline">Find all ships before your clicks run out</p>
+    </header>
 
-    <!-- Status Bar -->
-    <div class="status-bar">
-      <div class="stat">
-        <span class="stat-label">Clicks Left</span>
-        <span class="stat-value" id="clicks-left">8</span>
+    <!-- ── Difficulty Selector ── -->
+    <section class="difficulty-section" aria-label="Difficulty">
+      <div class="difficulty-label">Select Difficulty</div>
+      <div class="difficulty-btns" role="group">
+        <button class="diff-btn active" data-diff="easy" aria-pressed="true">
+          <span class="diff-icon">⭐</span>
+          <span class="diff-name">Easy</span>
+          <span class="diff-info">4×4 · 5 ships · 10 clicks</span>
+        </button>
+        <button class="diff-btn" data-diff="medium" aria-pressed="false">
+          <span class="diff-icon">⭐⭐</span>
+          <span class="diff-name">Medium</span>
+          <span class="diff-info">6×6 · 8 ships · 15 clicks</span>
+        </button>
+        <button class="diff-btn" data-diff="hard" aria-pressed="false">
+          <span class="diff-icon">⭐⭐⭐</span>
+          <span class="diff-name">Hard</span>
+          <span class="diff-info">8×8 · 12 ships · 20 clicks</span>
+        </button>
       </div>
-      <div class="stat">
-        <span class="stat-label">Ships Found</span>
-        <span class="stat-value" id="ships-found">0 / 5</span>
+    </section>
+
+    <!-- ── HUD ── -->
+    <div class="hud" aria-label="Game stats">
+      <div class="hud-item">
+        <span class="hud-icon">⏱</span>
+        <span class="hud-label">Time</span>
+        <span class="hud-value" id="timer-display">0:00</span>
+      </div>
+      <div class="hud-divider"></div>
+      <div class="hud-item">
+        <span class="hud-icon">🎯</span>
+        <span class="hud-label">Clicks Left</span>
+        <span class="hud-value" id="clicks-left">10</span>
+      </div>
+      <div class="hud-divider"></div>
+      <div class="hud-item">
+        <span class="hud-icon">🚢</span>
+        <span class="hud-label">Ships</span>
+        <span class="hud-value" id="ships-found">0/5</span>
+      </div>
+      <div class="hud-divider"></div>
+      <div class="hud-item">
+        <span class="hud-icon">💯</span>
+        <span class="hud-label">Score</span>
+        <span class="hud-value" id="score-display">0</span>
       </div>
     </div>
 
-    <!-- 4x4 Grid + Reset Button -->
+    <!-- ── Best Scores Bar ── -->
+    <div class="best-scores-bar">
+      <span class="bs-title">🏆 Best:</span>
+      <span class="bs-item"><em>Easy</em> <strong id="best-easy">—</strong></span>
+      <span class="bs-sep">·</span>
+      <span class="bs-item"><em>Med</em> <strong id="best-medium">—</strong></span>
+      <span class="bs-sep">·</span>
+      <span class="bs-item"><em>Hard</em> <strong id="best-hard">—</strong></span>
+    </div>
+
+    <!-- ── Game Grid ── -->
     <div class="grid-wrapper">
-      <div class="grid" id="game-grid"></div>
-      <button class="reset-btn" id="reset-btn">⟳ &nbsp;Reset</button>
+      <div class="grid" id="game-grid" role="grid" aria-label="Game board"></div>
+      <div class="grid-footer">
+        <button class="reset-btn" id="reset-btn">↺ Reset</button>
+        <button class="mute-btn"  id="mute-btn"  title="Toggle sound">🔊</button>
+      </div>
     </div>
 
-    <!--  Rules -->
+    <!-- ── Rules ── -->
     <div class="rules-card">
-      <div class="rules-title"> How to Play</div>
+      <div class="rules-title">📜 How to Play</div>
       <ul class="rules-list">
-        <li>Click on the cells to reveal the image hidden behind them.</li>
-        <li>There are 5 ships hidden in the game.</li>
-        <li>You win if you can find all ships in less than 8 clicks, else you lose.</li>
+        <li>Click cells to reveal a ship 🚢 or water 🌊.</li>
+        <li>Find all ships within the allowed clicks to win.</li>
+        <li>Score = ships×100 − 10 per click used + time bonus.</li>
+        <li>Finish faster to earn a bigger time bonus!</li>
       </ul>
     </div>
 
   </div>
 
-  <!--  Win / Lose Overlay -->
-  <div class="overlay" id="result-overlay">
+  <!-- ── Result Overlay ── -->
+  <div class="overlay" id="result-overlay" role="dialog" aria-modal="true">
     <div class="result-card">
       <div class="result-emoji" id="result-emoji"></div>
       <div class="result-title" id="result-title"></div>
       <div class="result-sub"   id="result-sub"></div>
+
+      <div class="result-stats">
+        <div class="rs-item">
+          <span class="rs-label">Score</span>
+          <span class="rs-value" id="final-score">0</span>
+        </div>
+        <div class="rs-item">
+          <span class="rs-label">Time</span>
+          <span class="rs-value" id="final-time">0:00</span>
+        </div>
+        <div class="rs-item">
+          <span class="rs-label">Ships</span>
+          <span class="rs-value" id="final-ships">0/0</span>
+        </div>
+      </div>
+
+      <div class="new-best" id="new-best" hidden>🏆 New Best Score!</div>
       <button class="play-again-btn" id="play-again-btn">Play Again</button>
     </div>
   </div>
 
-  <!-- External Script -->
   <script src="script.js"></script>
-
 </body>
 </html>

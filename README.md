@@ -4,46 +4,66 @@ A lightweight browser-based Battleship mini-game built with HTML, CSS, and JavaS
 
 ## Game Overview
 
-This project is a fast, arcade-style version of Battleship played on a 4x4 grid.
+This project is a fast, arcade-style version of Battleship playable across three difficulty levels.
 You uncover tiles one by one to find all hidden ships before you run out of clicks.
 
-- Grid size: 4x4 (16 cells)
-- Hidden ships: 5
-- Maximum clicks: 8
-- Win condition: find all 5 ships within 8 clicks
-- Lose condition: 8 clicks used and not all ships are found
+**Difficulty Levels:**
+- **Easy**: 4×4 grid (16 cells) · 5 ships · 10 clicks
+- **Medium**: 6×6 grid (36 cells) · 8 ships · 15 clicks
+- **Hard**: 8×8 grid (64 cells) · 12 ships · 20 clicks
+
+**Scoring System:**
+- Base score: 100 points per ship found
+- Penalty: −10 points per unnecessary click
+- Time bonus: up to +300 points for speed (faster = more bonus)
+- Win bonus: +200 points for finding all ships
+- Best scores are tracked per difficulty and stored locally
 
 ## Features
 
-- Random ship placement every new game
-- Animated reveal effect for each clicked cell
-- Live status display for:
-  - Clicks left
-  - Ships found
-- Win/Lose result overlay
-- One-click reset and play again flow
+- **Three difficulty levels** with dynamic grid sizing and adjustable ship counts
+- **Random ship placement** for unique gameplay every round
+- **Dynamic bubble animations** with 8 unique animated background effects
+- **Animated reveal effects** with flip transitions and ripple feedback
+- **Live HUD display** showing:
+  - Elapsed time (with auto-start timer)
+  - Clicks remaining (with color warnings)
+  - Ships found / total
+  - Live score calculation
+- **Best scores tracking** per difficulty level (stored in browser localStorage)
+- **Sound effects** with Web Audio API (toggle on/off)
+- **Win/Lose result overlay** with final stats and new best score badge
+- **Responsive design** for desktop, tablet, and mobile devices
 
 ## Rules And Guidelines
 
-1. Click any unrevealed grid cell to scan it.
-2. Each click reveals either:
-   - A ship (hit)
-   - Water (miss)
-3. You can click each cell only once.
-4. You have a maximum of 8 clicks.
-5. You win immediately when all 5 ships are found.
-6. If you reach 8 clicks without finding all ships, you lose.
-7. On loss, all remaining hidden cells are revealed.
+1. **Select a difficulty** before starting (Easy, Medium, or Hard).
+2. Click any unrevealed grid cell to scan it.
+3. Each click reveals either:
+   - A ship 🚢 (hit)
+   - Water 🌊 (miss)
+4. You can click each cell only once.
+5. You have a limited number of clicks based on difficulty.
+6. **Win condition**: Find all ships within your click limit.
+7. **Lose condition**: Run out of clicks while ships remain hidden.
+8. On loss, all remaining hidden cells are revealed.
+9. Your final score is calculated based on ships found, clicks used, and time taken.
+10. Best scores are automatically tracked and displayed for each difficulty.
 
 ## How To Play
 
 1. Open the game in your browser.
-2. Watch the top status bar:
-   - Clicks Left: remaining attempts
-   - Ships Found: current progress out of 5
-3. Start clicking tiles and try to locate ships efficiently.
-4. Use the Reset button anytime to start a fresh round.
-5. After win/loss, click Play Again to restart.
+2. **Select your difficulty** from the three available options at the top.
+3. Watch the **HUD (top status bar)** which displays:
+   - ⏱ **Time**: Elapsed time (auto-starts on first click)
+   - 🎯 **Clicks Left**: Your remaining attempts
+   - 🚢 **Ships**: Current progress (e.g., 2/5 found)
+   - 💯 **Score**: Live score calculation as you play
+4. **Best scores bar** shows your top score for each difficulty.
+5. Start clicking tiles strategically to find ships efficiently.
+6. Use the **Reset button** (↺) anytime to restart the current game.
+7. Toggle sound **on/off** with the 🔊 button.
+8. After win/loss, click **Play Again** to restart or select a different difficulty.
 
 ## Project Structure
 
@@ -108,14 +128,6 @@ code .
 - No build tools or package installation required.
 - Fully frontend and static.
 - Works in modern browsers (Chrome, Edge, Firefox).
-
-## Future Improvements (Optional)
-
-- Difficulty levels (different grid sizes)
-- Sound effects for hit/miss and game result
-- Timer and score system
-- Local best-score tracking
-- Responsive adjustments for very small screens
 
 ## Author
 
