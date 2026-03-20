@@ -75,9 +75,12 @@ You uncover tiles one by one to find all hidden ships before you run out of clic
 
 
 
-### Game Start
+### Game Window
 
-![Game Start](docs/screenshots/game-start.png)
+![Game Start](docs/screenshots/Game-Window.png)
+![4x4](docs/screenshots/4x4.png)
+![6x6](docs/screenshots/6x6.png)
+![8x8](docs/screenshots/8x8.png)
 
 ### Win Screen
 
@@ -86,10 +89,10 @@ But you may try your luck.
 
 ### Lose Screen
 
-![Lose Screen](docs/screenshots/losse-screen.png)
+![Lose Screen]()
 
 ### Instruction Screen
-![Instruction Screen](docs/screenshots/instructions.png)
+![Instruction Screen](docs/screenshots/Instructions.png)
 
 
 ## Setup On Desktop
