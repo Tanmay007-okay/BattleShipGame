@@ -89,7 +89,7 @@ But you may try your luck.
 
 ### Lose Screen
 
-![Lose Screen]()
+![Lose Screen](docs/screenshots/lose.png)
 
 ### Instruction Screen
 ![Instruction Screen](docs/screenshots/Instructions.png)
