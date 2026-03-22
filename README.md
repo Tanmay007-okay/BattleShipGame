@@ -84,8 +84,7 @@ You uncover tiles one by one to find all hidden ships before you run out of clic
 
 ### Win Screen
 
-Sadly,i never won.
-But you may try your luck.
+![win](docs/screenshots/win.png)
 
 ### Lose Screen
 
